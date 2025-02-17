@@ -19,7 +19,7 @@ function Payment() {
 
   useEffect(() => {
     const buyBook = async () => {
-      const response = await fetch(`http://localhost:5000/api/payments/buybook`, {
+      const response = await fetch(`https://santo-app.onrender.com/api/payments/buybook`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -66,7 +66,7 @@ function Payment() {
         // Handle successful payment here
 
         try {
-          const response = await fetch(`http://localhost:5000/api/payments/addpaymentreference`, {
+          const response = await fetch(`https://santo-app.onrender.com/api/payments/addpaymentreference`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

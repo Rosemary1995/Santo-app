@@ -17,7 +17,7 @@ const Signup = () => {
             // Clear any existing user session
             localStorage.removeItem('userData');
 
-            const response = await fetch(`http://localhost:5000/api/auth/register`, {
+            const response = await fetch(`https://santo-app.onrender.com/api/auth/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
