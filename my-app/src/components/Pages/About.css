@@ -1,0 +1,53 @@
+/* About Page Styles */
+.about-page {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+  }
+  
+  .about-hero {
+    text-align: center;
+    background: #007bff;
+    color: white;
+    padding: 60px 20px;
+  }
+  
+  .about-hero h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+  }
+  
+  .about-hero p {
+    font-size: 18px;
+  }
+  
+  .about-content {
+    padding: 40px 20px;
+    background: #f9f9f9;
+  }
+  
+  .about-content h2 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .about-content p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 20px;
+  }
+  
+  .about-content ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .about-content li {
+    font-size: 16px;
+    margin: 10px 0;
+  }
+  
+  .about-content li strong {
+    color: #007bff;
+  }
+  

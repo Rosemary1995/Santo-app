@@ -1,0 +1,134 @@
+.book-item {
+  display: flex;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  margin: 1rem 0;
+  gap: 2rem;
+}
+
+.book-item.hovered {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.book-image-container {
+  position: relative;
+  min-width: 200px;
+}
+
+.book-image {
+  width: 200px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.discount-badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: #ff4757;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.book-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.book-title {
+  font-size: 1.5rem;
+  margin: 0 0 0.5rem 0;
+  color: #2d3436;
+}
+
+.book-author {
+  color: #636e72;
+  font-style: italic;
+  margin: 0 0 1rem 0;
+}
+
+.book-description {
+  color: #636e72;
+  line-height: 1.6;
+  margin: 0 0 1.5rem 0;
+}
+
+.book-price-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+.price-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.original-price {
+  color: #636e72;
+  text-decoration: line-through;
+  font-size: 0.9rem;
+}
+
+.current-price {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #2d3436;
+}
+
+.buy-now-btn {
+  background: #0984e3;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.buy-now-btn:hover {
+  background: #0061a8;
+}
+
+@media (max-width: 768px) {
+  .book-item {
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .book-image-container {
+    min-width: auto;
+    align-self: center;
+  }
+
+  .book-image {
+    width: 150px;
+    height: 225px;
+  }
+
+  .book-price-section {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .buy-now-btn {
+    width: 100%;
+  }
+}
+  
