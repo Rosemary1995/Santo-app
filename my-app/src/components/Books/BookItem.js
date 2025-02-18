@@ -33,7 +33,7 @@ const BookItem = ({ book, onBuyNow }) => {
           <button 
             className="buy-now-btn"
             onClick={() => onBuyNow(book)}
-            aria-label={`Buy ${book.title}`}
+            aria-label={`Buy KES.{book.title}`}
           >
             Buy Now
           </button>
