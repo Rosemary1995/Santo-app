@@ -69,7 +69,7 @@ const Books = () => {
               <tr key={book.id}>
                 <td className="px-6 py-4">{book.title}</td>
                 <td className="px-6 py-4">{book.author}</td>
-                <td className="px-6 py-4">${book.bookingCost}</td>
+                <td className="px-6 py-4">KES.{book.bookingCost}</td>
                 <td className="px-6 py-4">
                   {userRole === 'admin' ? (
                     <>

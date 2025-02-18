@@ -55,7 +55,7 @@ const Payments = () => {
               <tr key={payment.id}>
                 <td className="px-6 py-4">{index + 1}</td>
                 <td className="px-6 py-4">{payment?.book?.title}</td>
-                <td className="px-6 py-4">${payment?.book?.bookingCost}</td>
+                <td className="px-6 py-4">KES.{payment?.book?.bookingCost}</td>
                 <td className="px-6 py-4">{new Date(payment?.paymentDate).toLocaleDateString()}</td>
                 <td className="px-6 py-4">
 
