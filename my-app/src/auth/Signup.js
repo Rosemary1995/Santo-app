@@ -12,7 +12,7 @@ const Signup = () => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-
+console.log("name")
         try {
             // Clear any existing user session
             localStorage.removeItem('userData');
