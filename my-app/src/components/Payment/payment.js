@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PaystackPop from '@paystack/inline-js';
 import { useLocation } from 'react-router-dom';
 import { loadStripe } from '@stripe/stripe-js';
+import { backendUrl } from '../../backend/backend';
 import './Payment.css';
 
 const stripePromise = loadStripe('your-stripe-publishable-key');
@@ -19,7 +20,7 @@ function Payment() {
 
   useEffect(() => {
     const buyBook = async () => {
-      const response = await fetch(`https://santo-app.onrender.com/api/payments/buybook`, {
+      const response = await fetch(`${backendUrl}/api/payments/buybook`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -50,8 +51,6 @@ function Payment() {
       amount: book?.bookingCost * 100, // Convert to kobo/cents
       currency: 'KES', // Kenyan Shillings
      
-      
-
       ref: `${Math.floor(Math.random() * 1000000000 + 1)}`, // Generate reference
       firstname: user?.user?.name,
       phone: "0706453789",
@@ -66,7 +65,7 @@ function Payment() {
         // Handle successful payment here
 
         try {
-          const response = await fetch(`https://santo-app.onrender.com/api/payments/addpaymentreference`, {
+          const response = await fetch(`${backendUrl}/api/payments/addpaymentreference`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

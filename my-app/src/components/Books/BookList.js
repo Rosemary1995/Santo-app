@@ -1,15 +1,17 @@
 // BookList.jsx
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { backendUrl } from '../../backend/backend';
 import './BookList.css';
 import Navbar from '../Navbar/Navbar';
+import { FaAmazon, FaShoppingCart } from 'react-icons/fa';
 
 function BookList() {
   const navigate = useNavigate();
   const [books, setBooks] = useState([]);
   
   useEffect(() => {
-    fetch('https://santo-app.onrender.com/api/books')
+    fetch(`${backendUrl}/api/books`)
       .then(response => response.json())
       .then(data => setBooks(data))
       .catch(error => console.error('Error fetching books:', error));
@@ -21,34 +23,51 @@ function BookList() {
     <>
       <Navbar />
       <div className="books-page">
-      <h1 className="books-title">Available Books</h1>
-      <div className="book-grid">
-        {books?.map((book) => (
-          <div className="book-card" key={book._id}>
-            <div className="book-image-container">
-              <img 
-                src={book.coverImage} 
-                alt={book.title} 
-                className="book-image"
-              />
-            </div>
+        <h1 className="books-title">Discover Your Next Read</h1>
+        <div className="book-grid">
+          {books?.map((book) => (
+            <div className="book-card" key={book._id}>
+              <div className="book-image-container">
+                <img 
+                  src={book.coverImage} 
+                  alt={book.title} 
+                  className="book-image"
+                  loading="lazy"
+                />
+              </div>
 
-            <div className="book-info">
-              <h3 className="book-title">{book.title}</h3>
-              <p className="book-author">by {book.author}</p>
-              <p className="book-description">{book.description}</p>
-              <p className="book-price">KES.{book.bookingCost}</p>
-              <button 
-                className="buy-button"
-                onClick={() => navigate('/payment', { state: book })}
-              >
-                Buy Now
-              </button>
+              <div className="book-info">
+                <h3 className="book-title">{book.title}</h3>
+                <p className="book-author">by {book.author}</p>
+                <p className="book-description">
+                  {book.description.length > 150 
+                    ? `${book.description.substring(0, 150)}...` 
+                    : book.description}
+                </p>
+                <p className="book-price">KES {book.bookingCost.toLocaleString()}</p>
+                <div className="button-container">
+                  <button 
+                    className="buy-button primary"
+                    onClick={() => navigate('/payment', { state: book })}
+                  >
+                    <FaShoppingCart className="button-icon" />
+                    Buy Now
+                  </button>
+                  <a 
+                    href="https://www.amazon.com/Wanjiku-Legacy-Stephen-Gichia-Njuguna-ebook/dp/B0DY5LD864"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="buy-button amazon"
+                  >
+                    <FaAmazon className="button-icon" />
+                    Buy on Amazon
+                  </a>
+                </div>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
     </>
     
   );

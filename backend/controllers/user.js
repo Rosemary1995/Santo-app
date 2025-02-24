@@ -15,7 +15,7 @@ const getMyBooks = async (req, res) => {
         // If user is admin, return all books
         if (user.role === 'admin') {
             const allBooks = await Book.find({})
-                .select('title author price description bookingCost');
+                .select('title author price description bookUrl coverImage bookingCost');
             
             return res.status(200).json({
                 success: true,
@@ -28,7 +28,7 @@ const getMyBooks = async (req, res) => {
         const userWithBooks = await User.findById(req.user.userId)
             .populate({
                 path: 'books',
-                select: 'title author price description bookingCost'
+                select: 'title author price description bookUrl coverImage bookingCost'
             });
 
         res.status(200).json({

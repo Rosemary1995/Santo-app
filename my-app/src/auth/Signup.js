@@ -1,5 +1,6 @@
 import React, { useState } from 'react'; 
 import { NavLink, useNavigate } from 'react-router-dom';
+import { backendUrl } from '../backend/backend';
 import './Authform.css';
 
 const Signup = () => {
@@ -17,7 +18,7 @@ console.log("name")
             // Clear any existing user session
             localStorage.removeItem('userData');
 
-            const response = await fetch(`https://santo-app.onrender.com/api/auth/register`, {
+            const response = await fetch(`${backendUrl}/api/auth/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

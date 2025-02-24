@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import "./Loginform.css"
+import { backendUrl } from '../backend/backend';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -15,7 +16,7 @@ const Login = () => {
     setLoading(true);
     
     try {
-      const response = await fetch(`https://santo-app.onrender.com/api/auth/login`, {
+      const response = await fetch(`${backendUrl}/api/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
