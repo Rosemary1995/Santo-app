@@ -1,26 +1,34 @@
-import React, { useContext } from 'react';
+import React, { useContext } from 'react'; 
 import './HomePage.css';
+import { useNavigate } from 'react-router-dom';
 
 import AuthContext from "../../context/AuthContext";
 import Navbar from '../Navbar/Navbar';
 
 const HomePage = () => {
   const { user } = useContext(AuthContext);
-  
-  console.log(user)
+  const navigate = useNavigate();
 
   return (
     <div className="home-page">
       <Navbar />
       <header className="hero">
-        {user?.user &&
-        <h1>Hello {user?.user?.name}</h1>
-      }
+        {user?.user && <h1>Hello {user?.user?.name}</h1>}
         <h1>Welcome to the Santo E-Book App</h1>
         <p>Your gateway to thousands of books, anytime, anywhere.</p>
         <a href="/books" className="hero-button">Browse Books</a>
 
+        {/* Show Dashboard Button Only if User is Logged In */}
+        {user?.user && (
+          <button 
+            className="dashboard-button" 
+            onClick={() => navigate('/dashboard')}
+          >
+            Already paid? READ BOOK
+          </button>
+        )}
       </header>
+
       <section className="features">
         <h2>Why Choose Us?</h2>
         <div className="feature-cards">
@@ -43,3 +51,4 @@ const HomePage = () => {
 };
 
 export default HomePage;
+
