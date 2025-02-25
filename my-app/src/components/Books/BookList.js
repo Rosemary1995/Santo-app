@@ -51,7 +51,7 @@ function BookList() {
                     onClick={() => navigate('/payment', { state: book })}
                   >
                     <FaShoppingCart className="button-icon" />
-                    Buy Now
+                    Buy Now Mpesa option
                   </button>
                   <a 
                     href="https://www.amazon.com/Wanjiku-Legacy-Stephen-Gichia-Njuguna-ebook/dp/B0DY5LD864"
