@@ -30,11 +30,14 @@ const Books = () => {
     book.author.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const openBookPreview = (url) => {
+  //const openBookPreview = (url) => {
     // Convert view/edit URL to preview URL
-    const previewUrl = url.replace(/\/view\?usp=.*$/, '/preview');
-    window.open(previewUrl, '_blank');
-  };
+  ///  const previewUrl = url.replace(/\/view\?usp=.*$/, '/preview');
+   // window.open(previewUrl, '_blank');
+  //};
+const openBookPreview = (url) => {
+  window.open(url, "_blank"); // Opens in a new tab
+};
 
   return (
     <div className="p-6 max-w-7xl mx-auto">
