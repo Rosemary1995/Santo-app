@@ -46,7 +46,7 @@ function Payment() {
     try {
       const paystack = new PaystackPop();
     paystack.newTransaction({
-      key: 'pk_test_bf87c73b7e26f0c6f46bfc2f3ec6cb321f9670bf', // Replace with your Paystack public key
+      key: 'pk_live_178fa4c61633208ff064de2414b0b1573430b8e2', // Replace with your Paystack public key
       email: user?.user?.email,
       amount: book?.bookingCost * 100, // Convert to kobo/cents
       currency: 'KES', // Kenyan Shillings

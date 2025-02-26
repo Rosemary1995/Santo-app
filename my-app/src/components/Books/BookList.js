@@ -45,6 +45,7 @@ function BookList() {
                     : book.description}
                 </p>
                 <p className="book-price">KES {book.bookingCost.toLocaleString()}</p>
+                
                 <div className="button-container">
                   <button 
                     className="buy-button primary"
