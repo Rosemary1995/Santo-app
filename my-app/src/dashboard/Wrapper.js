@@ -82,6 +82,10 @@ const Wrapper = () => {
               </>
             ) : (
               <>
+                
+                <a href="/" className="hero-button bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-200">
+   Home page
+  </a>
                 <NavLink to="/dashboard/my-books" icon={FaBook}> Click to view My paid Books</NavLink>
                 <NavLink to="/dashboard/payments" icon={FaMoneyBill}>Payments</NavLink>
               </>
