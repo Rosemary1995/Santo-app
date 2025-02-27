@@ -1,6 +1,6 @@
 const express = require('express');
-const Stripe = require('stripe');
 const cors = require('cors');
+const Stripe = require('stripe');
 const morgan = require('morgan');
 const { connect_database } = require('./db');
 
@@ -9,79 +9,77 @@ const app = express();
 
 connect_database();
 
-const allowedOrigins = ['https://santo-app.vercel.app', 'http://localhost:3000'];
+// ✅ Improved CORS Configuration
+const allowedOrigins = [
+  'http://localhost:3000', // Local Frontend
+  'https://santo-app.vercel.app/' // Deployed Frontend
+];
 
 app.use(cors({
   origin: function (origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
-      callback(new Error('Not allowed by CORS'));
+      callback(new Error('CORS policy does not allow this origin'));
     }
   },
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true, // Allow cookies/sessions if needed
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Allowed methods
+  allowedHeaders: 'Content-Type,Authorization', // Allowed headers
 }));
 
-
-app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
 
+// Import Routes
 const authRoutes = require('./routes/auth');
 const authMiddleware = require('./middlewares/auth');
 const booksRoutes = require('./routes/books');
 const userRoutes = require('./routes/users');
 const paymentRoutes = require('./routes/payments');
 
-
-
-// Routes
-//app.use('/api/auth', authRoutes);
-
-
-
+// ✅ Test Route
 app.get('/', (req, res) => {
-  res.json({ message: 'Hello World' }).status(200);
+  res.status(200).json({ message: 'Hello World' });
 });
 
-
-// Auth Routes
+// ✅ API Routes
 app.use('/api/auth', authRoutes);
-
-// Books Routes
 app.use('/api/books', booksRoutes);
-
-// User Routes
 app.use('/api/users', authMiddleware, userRoutes);
-
-// Create a payment session
 app.use('/api/payments', paymentRoutes);
 
-
-// Protected Routes
-
-
+// ✅ Protected Route (Requires Authentication)
 app.get('/protected', authMiddleware, (req, res) => {
-  res.json({ message: 'Access granted', user: req.user });
+  res.status(200).json({ message: 'Access granted', user: req.user });
 });
 
-
-
-
+// ✅ Create a Payment Intent (Stripe)
 app.post('/create-payment-intent', async (req, res) => {
   try {
     const { amount } = req.body;
+    if (!amount) return res.status(400).json({ error: 'Amount is required' });
+
     const paymentIntent = await stripe.paymentIntents.create({
       amount,
       currency: 'usd',
     });
+
     res.status(200).json({ clientSecret: paymentIntent.client_secret });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 
-const PORT = 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// ✅ Global Error Handler (CORS & Other Errors)
+app.use((err, req, res, next) => {
+  console.error('Error:', err.message);
+  if (err.message.includes('CORS')) {
+    return res.status(403).json({ error: 'CORS policy error. Origin not allowed.' });
+  }
+  res.status(500).json({ error: err.message || 'Internal Server Error' });
+});
+
+// ✅ Start Server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
