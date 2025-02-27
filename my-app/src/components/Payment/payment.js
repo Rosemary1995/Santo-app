@@ -45,63 +45,60 @@ function Payment() {
     setIsProcessing(true);
     try {
       const paystack = new PaystackPop();
-      paystack.newTransaction({
-        key: 'pk_test_bf87c73b7e26f0c6f46bfc2f3ec6cb321f9670bf', // Replace with your Paystack public key
-        email: user?.user?.email,
-        amount: book?.bookingCost * 100, // Convert to kobo/cents
-        currency: 'KES', // Kenyan Shillings
-        ref: `${Math.floor(Math.random() * 1000000000 + 1)}`, // Generate reference
-        firstname: user?.user?.name,
-        phone: "0706453789",
-  
-        metadata: {
-          book_id: book?._id,
-          payment_id: paymentId,
-        },
-  
-        onSuccess: async (transaction) => {
-          console.log(`Payment complete! Reference: ${transaction.reference}`);
-  
-          // ✅ Immediately Fetch Book and Redirect to Read Page
-          try {
-            await fetch(`${backendUrl}/api/payments/addpaymentreference`, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ 
-                paymentId: paymentId,
-                status: 'Completed',
-                reference: transaction.reference
-              }),
-            });
-  
-            // ✅ Get Book Immediately and Redirect User
-            const bookResponse = await fetch(`${backendUrl}/api/books/getBook?bookId=${book?._id}`, {
-              headers: { Authorization: `Bearer ${user.token}` },
-            });
-  
-            if (!bookResponse.ok) throw new Error('Failed to fetch book.');
-  
-            const bookData = await bookResponse.json();
-            console.log('Book fetched:', bookData);
-  
-            // ✅ Redirect User to Read Book Page
-            window.location.href = `/dashboard/my-books?book=${bookData.bookUrl}`;
-          } catch (error) {
-            console.log('Error after payment:', error);
+    paystack.newTransaction({
+      key: 'pk_test_bf87c73b7e26f0c6f46bfc2f3ec6cb321f9670bf', // Replace with your Paystack public key
+      email: user?.user?.email,
+      amount: book?.bookingCost * 100, // Convert to kobo/cents
+      currency: 'KES', // Kenyan Shillings
+     
+      ref: `${Math.floor(Math.random() * 1000000000 + 1)}`, // Generate reference
+      firstname: user?.user?.name,
+      phone: "0706453789",
+
+      metadata: {
+        book_id: book?._id,
+        payment_id: paymentId
+      },
+
+      onSuccess: async (transaction) => {
+        console.log(`Payment complete! Reference: ${transaction.reference}`);
+        // Handle successful payment here
+
+        try {
+          const response = await fetch(`${backendUrl}/api/payments/addpaymentreference`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ 
+              paymentId: paymentId,
+              status: 'Completed',
+              reference: transaction.reference
+             }),
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            console.log(data);
+            window.location.href = '/dashboard';
           }
-        },
-  
-        onCancel: () => {
-          console.log('Transaction cancelled');
+        } catch (error) {
+          console.log(error);
         }
-      });
+
+        console.log({ transaction, paymentId, book });
+      },
+      onCancel: () => {
+        console.log('Transaction cancelled');
+      }
+
+    });
     } catch (error) {
       setPaymentStatus('Payment failed. Please try again.');
     } finally {
       setIsProcessing(false);
     }
   };
-  
 
   if (!book) {
     return (
