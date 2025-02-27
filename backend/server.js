@@ -1,6 +1,6 @@
+const cors = require('cors');
 const express = require('express');
 const Stripe = require('stripe');
-const cors = require('cors');
 const morgan = require('morgan');
 const { connect_database } = require('./db');
 
