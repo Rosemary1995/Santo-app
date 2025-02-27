@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const Stripe = require('stripe');
 const morgan = require('morgan');
 const { connect_database } = require('./db');
@@ -7,7 +8,7 @@ const stripe = Stripe('your-stripe-secret-key');
 const app = express();
 
 connect_database();
-const cors = require('cors');
+
 app.use(cors({
     origin: '*', // Allows all origins (Use specific domain in production)
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
