@@ -82,7 +82,7 @@ const Wrapper = () => {
               </>
             ) : (
               <>
-                <NavLink to="/dashboard/my-books" icon={FaBook}>My Books</NavLink>
+                <NavLink to="/dashboard/my-books" icon={FaBook}> Click to view My paid Books</NavLink>
                 <NavLink to="/dashboard/payments" icon={FaMoneyBill}>Payments</NavLink>
               </>
             )}

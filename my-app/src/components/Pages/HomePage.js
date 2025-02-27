@@ -22,7 +22,7 @@ const HomePage = () => {
         {user?.user && (
           <button 
             className="dashboard-button" 
-            onClick={() => navigate('/dashboard')}
+            onClick={() => navigate('/dashboard/my-books')}
           >
             Already paid? READ BOOK
           </button>

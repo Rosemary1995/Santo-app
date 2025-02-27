@@ -64,12 +64,19 @@ const Books = () => {
             <p className="text-gray-600 mb-2">{book.author}</p>
             <p className="text-blue-600 font-medium mb-3">KES {book.bookingCost}</p>
             <div className="flex gap-2">
-              <button 
-                onClick={() => openBookPreview(book.bookUrl)}
-                className="flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-600 rounded-md hover:bg-blue-100 transition duration-200"
-              >
-                <FaBook /> Read
-              </button>
+            <button 
+  onClick={() => openBookPreview(book.bookUrl)}
+  className="flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-600 rounded-md hover:bg-blue-100 transition duration-200"
+>
+  <img 
+    src="https://i.postimg.cc/MGK9053k/1738767493235-e23fff36-d504-46cd-8c5a-237fb8993fa7-1.jpg" 
+    alt="Read Book" 
+    className="w-6 h-6 object-cover rounded"
+  />
+  Read
+</button>
+
+
               {userRole === 'admin' && (
                 <>
                   <button className="flex items-center gap-2 px-4 py-2 bg-gray-50 text-gray-600 rounded-md hover:bg-gray-100">
@@ -106,12 +113,21 @@ const Books = () => {
                 </td>
                 <td className="px-6 py-4">
                   <div className="flex gap-2">
-                    <button 
-                      onClick={() => openBookPreview(book.bookUrl)}
-                      className="flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-600 rounded-md hover:bg-blue-100 transition duration-200"
-                    >
-                      <FaBook /> Read
-                    </button>
+                  <button  
+  onClick={() => openBookPreview(book.bookUrl)}
+  className="flex items-center gap-3 px-5 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition duration-300 ease-in-out"
+>
+  <img 
+    src="https://i.postimg.cc/MGK9053k/1738767493235-e23fff36-d504-46cd-8c5a-237fb8993fa7-1.jpg" 
+    alt="Read Book" 
+    className="w-8 h-8 object-cover rounded-md"
+  />
+  Read Now
+</button>
+
+
+
+
                     {userRole === 'admin' && (
                       <>
                         <button className="flex items-center gap-2 px-4 py-2 bg-gray-50 text-gray-600 rounded-md hover:bg-gray-100">
