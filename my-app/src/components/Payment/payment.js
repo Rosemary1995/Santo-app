@@ -80,7 +80,7 @@ function Payment() {
           if (response.ok) {
             const data = await response.json();
             console.log(data);
-            window.location.href = '/dashboard';
+            window.location.href = '/dashboard/my-books';
           }
         } catch (error) {
           console.log(error);
