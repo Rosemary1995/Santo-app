@@ -9,11 +9,7 @@ const app = express();
 
 connect_database();
 
-app.use(cors({
-    origin: '*', // Allows all origins (Use specific domain in production)
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-   allowedHeaders: ['Content-Type', 'Authorization']
-}));
+app.use(cors());
 
 app.use(cors());
 app.use(express.json());
