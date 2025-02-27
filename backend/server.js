@@ -9,11 +9,11 @@ const app = express();
 
 connect_database();
 
-const corsOptions = {
-  origin: ['http://localhost:3000', 'https://your-live-frontend.com'], // Add frontend URLs
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true, // Allow cookies/auth headers
-};
+app.use(cors({
+    origin: '*', // Allows all origins (Use specific domain in production)
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 app.use(cors());
 app.use(express.json());
