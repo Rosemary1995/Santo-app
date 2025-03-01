@@ -43,7 +43,7 @@ function Payment() {
   const handlePayment = async () => {
     if (!paymentId) {
       console.error('Payment ID is missing, cannot proceed.');
-      setPaymentStatus('Error: Payment ID missing. Please refresh and try again.');
+      setPaymentStatus('Error: Payment ID missing. Please click again.');
       return;
     }
 
